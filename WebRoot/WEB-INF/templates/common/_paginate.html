@@ -1,0 +1,55 @@
+<#macro paginate currentPage totalPage actionUrl urlParas="">
+	<#if (totalPage <= 0) || (currentPage > totalPage)><#return></#if>
+	<#local startPage = currentPage - 4>
+	<#if (startPage < 1)><#local startPage = 1></#if>
+	
+	<#local endPage = currentPage + 4>
+	<#if (endPage > totalPage)><#local endPage = totalPage></#if>
+	
+	<div class="dataTables_paginate">
+	<ul class="pagination">
+			<#if (currentPage <= 8)>
+				<#local startPage = 1>
+			</#if>
+			<#if ((totalPage - currentPage) < 8)>
+				<#local endPage = totalPage>
+			</#if>
+			
+			<#if (currentPage == 1)>
+				<li class="prev disabled">
+				<a href="javascript:;"><</a>
+				</li>
+			<#else>
+				<li class="prev">
+				<a href="${actionUrl}?startPage=#{currentPage - 1}${urlParas!}"><</a>
+				</li>
+			</#if>
+			
+			<#if (currentPage > 8)>
+				<li><a href="${actionUrl}?startPage=#{1}${urlParas!}">#{1}</a></li>
+				<li><a href="${actionUrl}?startPage=#{2}${urlParas!}">#{2}</a></li>
+				<li><a href="javascript:;">...</a></li>
+			</#if>
+			
+			<#list startPage..endPage as i>
+				<#if currentPage == i>
+					<li class="active"><a href="javascript:;">#{i}</a></li>
+				<#else>
+					<li><a href="${actionUrl}?startPage=#{i}${urlParas!}">#{i}</a></li>
+				</#if>
+			</#list>
+			
+			<#if ((totalPage - currentPage) >= 8)>
+				<li><a href="javascript:;">...</a></li>
+				<li><a href="${actionUrl}?startPage=#{totalPage - 1}${urlParas!}">#{totalPage - 1}</a></li>
+				<li><a href="${actionUrl}?startPage=#{totalPage}${urlParas!}">#{totalPage}</a></li>
+			</#if>
+			
+			<#if (currentPage == totalPage)>
+				<li class="next disabled"><a href="javascript:;">></a></li>
+			<#else>
+				<li class="next"><a href="${actionUrl}?startPage=#{currentPage + 1}${urlParas!}">></a></li>
+			</#if>
+			</ul>
+	</div>
+</#macro>

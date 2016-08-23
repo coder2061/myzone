@@ -1,0 +1,74 @@
+						<!-- ModalLabel -->
+                        <div aria-labelledby="myLargeModalLabel" role="dialog" tabindex="-1" class="modal fade bs-example-modal-lg" style="display: none;" id="memberModal">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">
+                                            <span class="entypo-cancel"></span>
+                                        </button>
+                                        <h6 id="myLargeModalLabel" class="modal-title">个人信息</h6>
+                                    </div>
+                                    
+                                    <div class="modal-body">
+                                        <div class="compose_mail">
+                                        	<form role="form" id="memberfrm" action="${routepath}member/editMember" class="form-horizontal bucket-form">
+		                                        <div class="form-group">
+		                                            <label class="col-sm-3 control-label">姓名</label>
+		                                            <div class="col-sm-6">
+		                                                <input type="text" id="NameID" name="NameID" class="form-control round-input">
+		                                                <span class="help-block"></span>
+		                                            </div>
+		                                        </div>
+		                                        <div class="form-group">
+		                                            <label class="col-sm-3 control-label">手机号</label>
+		                                            <div class="col-sm-6">
+		                                                <input type="text" id="MobileID" name="MobileID"class="form-control">
+		                                                <span class="help-block"></span>
+		                                            </div>
+		                                        </div>
+		                                        <div class="form-group">
+		                                            <label class="col-sm-3 control-label">邮件</label>
+		                                            <div class="col-sm-6">
+		                                                <input type="text" id="EmailID" name="EmailID" class="form-control round-input">
+		                                                <span class="help-block"></span>
+		                                            </div>
+		                                        </div>
+		                                        <div class="form-group">
+		                                            <label class="col-sm-3 control-label">QQ</label>
+		                                            <div class="col-sm-6">
+		                                                <input type="text" id="QQID" name="QQID" class="form-control round-input">
+		                                                <span class="help-block"></span>
+		                                            </div>
+		                                        </div>
+		                                        <div class="form-group">
+		                                            <label class="col-sm-3 control-label">地址</label>
+		                                            <div class="col-sm-6">
+		                                                <input type="text" id="AddressID" name="AddressID" class="form-control">
+		                                                <span class="help-block"></span>
+		                                            </div>
+		                                        </div>
+		                                        <div class="form-group">
+		                                            <label class="col-sm-3 control-label" for="exampleInputFile">上传头像</label>
+		                                            <div class="col-sm-6">
+			                                            <input type="file" name="HeadPicID">
+				                                        <img src="/img/avatar.jpg" id="avatarID" class="avatar img-circle" style="width: 80px;height:80px;" alt="avatar">
+		                                            </div>
+		                                        </div>
+		                                        <div class="form-group text-center">
+	                                                <button  id="saveMember" class="btn btn-info" type="submit">
+	                                                    <span class="fontawesome-save"></span>&nbsp;&nbsp;保存
+	                                                </button>
+	                                                <button class="btn btn-info" type="reset">
+	                                                	<span class="entypo-pencil"></span>&nbsp;&nbsp;重置
+	                                                </button>
+		                                        </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+						<!-- END OF ModalLabel -->
+						

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlGroup name="contact" >
+	<sql id="getContactList">SELECT c.*,m.`Name` AS MemberName FROM `contact` c LEFT JOIN member m ON c.ContactID=m.ID WHERE c.MemberID=? AND c.IsDel=0 AND `Status`&gt;0 ORDER BY ID DESC;</sql>
+	<sql id="getContactListU">SELECT c.*,cg.`Name` AS GroupName,m.`Name` AS MemberName </sql>
+	<sql id="getContactListD"> FROM `contact` c LEFT JOIN contactgroup cg ON c.ContactGroupID=cg.ID LEFT JOIN member m ON c.ContactID=m.ID WHERE c.MemberID=? AND c.IsDel=0 AND c.`Status`&gt;0 sqlwhere ORDER BY ID DESC </sql>
+	<sql id="updateIsDel">UPDATE Contact SET IsDel=1 WHERE ID=?</sql>
+	<sql id="updateStatus">UPDATE Contact SET Status=? WHERE ID=?</sql>
+	<sql id="getContactList2">SELECT c.ID,c.Name,c.HeadPic FROM (SELECT * FROM contact WHERE MemberID=? AND IsDel=0 AND `Status`=1  ORDER BY ID DESC) c LEFT JOIN member m ON c.ContactID=m.ID WHERE m.IsLogin=?</sql>
+	
+	<!-- ContactGroup -->
+	<sql id="getContactGroupList">SELECT * FROM `contactgroup` WHERE IsDel=0 ORDER BY OrderNum;</sql>
+</sqlGroup>

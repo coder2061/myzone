@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlGroup name="member" >
+	<sql id="findMemberByAccount">SELECT * FROM `member` </sql>
+	<sql id="insertMember">INSERT member(NAME,Passwd) VALUES(?,?); </sql>
+	<sql id="insertMember2">INSERT member(NAME,Passwd,Mobile) VALUES(?,?,?); </sql>
+	
+</sqlGroup>

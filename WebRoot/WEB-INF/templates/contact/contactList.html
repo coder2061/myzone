@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>电子邮件系统 v1.0 - ${titlename?default('')}</title>
+    <base routepath="${routepath?default('myzone/')}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Le styles -->
+    <script type="text/javascript" src="/assets/js/jquery.js"></script>
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/loader-style.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/mail.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/assets/ico/minus.png">
+    <!-- bootstrap-select -->
+    <!--
+    <link rel="stylesheet" href="/assets/css/bootstrap-select.min.css">
+    -->
+    <!-- MAIN EFFECT -->
+    <script type="text/javascript" src="/assets/js/preloader.js"></script>
+    <script type="text/javascript" src="/assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/assets/js/app.js"></script>
+    <script type="text/javascript" src="/assets/js/load.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    
+	<!-- bootstrap-select -->
+	<!-- 
+	<script type="text/javascript" src="/assets/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="/assets/js/i18n/defaults-*.min.js"></script>
+     -->
+     
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+    
+    <!-- TOP NAVBAR -->
+    <#include "../common/_topnavbar.html" />
+    <!-- /END OF TOP NAVBAR -->
+
+    <!-- SIDE MENU -->
+    <#include "../common/_sidemenu.html" />
+    <!-- END OF SIDE MENU -->
+
+    <!--  PAPER WRAP -->
+    <div class="wrap-fluid">
+        <div class="container-fluid paper-wrap bevel tlbr">
+            
+            <!--TITLE -->
+            <#include "../common/_title.html" />
+            <!--/ TITLE -->
+
+            <!-- BREADCRUMB -->
+            <#include "../common/_breadcrum.html" />
+            <!-- END OF BREADCRUMB -->
+
+            <!-- CONTENT -->
+            <div class="content-wrap" style="height: auto;">
+                <div class="row">
+                	
+                	<!-- ModalLabel -->
+                	<div class="col-sm-2">
+                	<#include "../form/_contactform.html" />
+                	</div>
+                	<!-- END OF ModalLabel -->
+                
+                    <!-- CONTENT MAIL -->
+                    <div class="col-sm-10" style="width: 100%;">
+
+                        <div class="mail_header">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                
+							       <div class="input-group w200 pull-left" style=" margin:0 10px;">
+							        	<select name="groupID" id="groupID" class="form-control btn-info">
+							        				<option value="0" >全部</option>
+							        				<#if groups??>
+								        				<#list groups as list>
+								        						<#if list.ID==groupID>
+								        						<option value="${list.ID}" selected>${list.Name!''}</option>
+								        						<#else>
+								        						<option value="${list.ID}" >${list.Name!''}</option>
+								        						</#if>									
+														</#list>
+							        				</#if>
+										</select>
+							        </div>
+                                    <button id="addbtn" style="margin-right:10px" type="button" class="btn btn-info" data-toggle="modal" data-target="#contactModal">
+                                    	<span class="entypo-plus-squared"></span>&nbsp;&nbsp;新增
+                                    </button>
+                                    <button id="editbtn" style="margin-right:10px" type="button" class="btn btn-info" data-toggle="modal" data-target="#contactModal">
+                                    	<span class="entypo-pencil"></span>&nbsp;&nbsp;编辑
+                                    </button>
+                                	<button id="deletebtn" style="margin-right:10px" type="button" class="btn btn-info">
+                                    	<span class="entypo-trash"></span>&nbsp;&nbsp;删除
+                                    </button>
+                                    <button id="refreshbtn" style="margin-right:10px" type="button" data-color="#39B3D7" data-opacity="0.95" class="btn btn-info button test pull-left">
+                                        <span class="entypo-arrows-ccw"></span>&nbsp;&nbsp;刷新
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="content-mail">
+                            <div class="table-responsive">
+                                <!-- THE MESSAGES -->
+                                <#if list?exists && (list.getList()?size>0)>
+                                <table class="table table-mailbox">
+					     			<tr>
+					                     <th><input type="checkbox" id="checkall"></th>
+					                     <th>编号</th>
+					                     <th>头像</th>
+					                     <th>姓名</th>
+					                     <th>账户名</th>
+					                     <th>分组</th>
+					                     <th>手机</th>
+					                     <th>邮件</th>
+					                     <th>QQ</th>
+					                     <th>地址</th>
+					                     <th>是否首次发送邮件</th>
+					             </tr>
+					             <#list list.getList() as item>
+					             	<tr class="unread">
+					                     <td class="small-col">
+					                         <input type="checkbox" class="checkone" value="${item.ID?c}">
+					                     </td>
+					                     <td class="small-col">${item.ID?c}</td>
+					                     <td class="name"><img src="${item.HeadPic?default('/img/avatar.jpg')}" style="width:45px;height:45px;"/></td>
+					                     <td class="name">${item.Name?default('/')}</td>
+					                     <td class="name">${item.MemberName?default('/')}</td>
+					                     <td class="name">${item.GroupName?default('/')}</td>
+					                     <td class="name">${item.Mobile?default('/')}</td>
+					                     <td class="name">${item.Email?default('/')}</td>
+					                     <td class="name">${item.QQ?default('/')}</td>
+					                     <td class="name">${item.Address?default('/')}</td>
+					                     <td class="name  text-center">
+					                     <#if item.IsFirst?exists && item.IsFirst>是
+				           				<#else>否
+				           				</#if>
+					                     </td>
+					                 </tr>
+					             </#list>
+					             </table>
+						         	<h4>共${list.getTotalRow()}条/此页${list.getList().size()}条</h4>
+							       	<#include "../common/_paginate.html" />
+							      	<@paginate currentPage=list.pageNumber totalPage=list.totalPage actionUrl="${routepath}contact/contactList"  urlParas="&search=${tools.encode(search?default(''),'GET')}&groupID=${groupID?default('')}" />
+					            <#else>
+					            <div class='nolist'>没有您要搜索的记录！</div>
+								</#if>	
+								<!-- END OF THE MESSAGES -->
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        
+                    </div>
+                    <!-- /CONTENT MAIL -->
+                </div>
+            </div>
+            <!-- /END OF CONTENT -->
+            
+            <!-- FOOTER -->
+			<#include "../common/_footer.html" />
+			<!-- / END OF FOOTER -->
+			
+           </div>
+        </div>
+    </div>
+    <!--  END OF PAPER WRAP -->
+
+    <!-- RIGHT SLIDER CONTENT -->
+    <#include "../common/_rightslider.html" />
+	<!-- END OF RIGHT SLIDER CONTENT-->
+	
+    <script type="text/javascript">
+        $(function () {
+        	
+        	$("#groupID").change(function(){
+        		window.location.href = "${routepath}contact/contactList?search="+encodeURIComponent(encodeURIComponent($("#search").val()))+"&groupID="+$(this).val();
+        	});
+
+			$("#checkall").click(function(){
+				if (this.checked) {
+					$(".checkone").prop("checked", true);
+				} else {
+					$(".checkone").prop("checked", false);
+				}
+        	});
+        	
+        	$("#deletebtn").click(function(){
+            	var ids = "";
+            	$(".checkone:checked").each(function(){
+            	 ids += $(this).val() + ",";
+            	});
+            	if (notBlank(ids)) {
+					ids = ids.substring(0, ids.lastIndexOf(","));
+				} else {
+					alert("请选择删除项");
+					return false;
+				}
+            	if (confirm("确认要删除？")) {
+            		$.ajax({
+                        type: "POST",
+                        url: "${routepath}contact/delContact",
+                        data: "ids="+ids,
+                        dataType: "json",
+                        async:false,
+                        success: function(data){ 
+	                       	 if (data.status == 0) {
+	                       		 alert("操作成功");
+	                       		window.location.reload(true);
+	             			 } else {
+	             				alert("操作失败");
+	    					 }
+                        }
+                    });
+            	} else {
+            		window.event.returnValue = false; 
+				}
+            	
+        	});
+        	
+			$("#refreshbtn").click(function(){
+				window.location.reload(true);
+        	});
+			
+			$("#search").blur(function(){
+				var search = $(this).val();
+				if (notBlank(search)) {
+	            	window.location.href = "${routepath}contact/contactList?search="+encodeURIComponent(encodeURIComponent(search))+"&groupID="+$("#groupID").val();
+				}
+        	});
+			
+			$("#addbtn").click(function(){
+				clearContact();
+			});
+			
+			$("#editbtn").click(function(){
+				clearContact();
+				var ids = "";
+            	$(".checkone:checked").each(function(){
+            	 ids += $(this).val() + ",";
+            	});
+            	if (isBlank(ids)) {
+            		alert("请选择联系人");
+            		return false;
+				} else{
+					ids = ids.substring(0, ids.lastIndexOf(","));
+				} 
+            	if(ids.indexOf(",") > 0) {
+            		alert("只能选择一位联系人");
+            		return false;
+            	}
+				$.ajax({
+                    type: "POST",
+                    url: "${routepath}contact/contactInfo",
+                    data: "ContactID="+ids,
+                    dataType: "json",
+                    async:false,
+                    success: function(data){ 
+                    	var contact = data.contact;
+                       	 if (contact != null) {
+                       		$("#ContactID").val(ids);
+                       		$("#Name").val(strOper(contact.Name, ""));
+                        	$("#Email").val(strOper(contact.Email, ""));
+                			$("#Mobile").val(strOper(contact.Mobile, ""));
+                			$("#QQ").val(strOper(contact.QQ, ""));
+                			$("#ContactGroupID").val(strOper(contact.ContactGroupID, 0));
+                			$("#Address").val(strOper(contact.Address, ""));
+                			$("#avatar").attr("src",strOper(contact.HeadPic, "/img/avatar.jpg"));
+             			 } else {
+             				alert("卡死哥了");
+    					 }
+                    }
+                });
+				
+				//$("#contactModal").modal("show");
+			});
+			
+        });
+        
+        function clearContact(){
+        	$("#ContactID").val("");
+       		$("#Name").val("");
+        	$("#Email").val("");
+			$("#Mobile").val("");
+			$("#QQ").val("");
+			$("#ContactGroupID").val("");
+			$("#Address").val("");
+			$("#avatar").attr("src","/img/avatar.jpg");
+        }
+        
+        function checksubmit(){
+        	var Name = $("#Name").val();
+        	var Email = $("#Email").val();
+			var Mobile = $("#Mobile").val();
+			var QQ = $("#QQ").val();
+			var ContactGroupID = $("#ContactGroupID").val();
+			var Address = $("#Address").val();
+        }
+        
+    </script>
+
+</body>
+
+</html>

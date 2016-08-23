@@ -1,0 +1,27 @@
+					<!-- SIDEMENU MAIL -->
+                    <div class="col-sm-2">
+                    
+                        <div class="side-mail">
+                            <div class="btn btn-info button-mail" data-toggle="modal" data-target="#mailModal"><i class="entypo-pencil"></i>&nbsp;&nbsp;写邮件</div>
+                            <div class="list-btn-mail active">
+                                <span class="entypo-download"></span><a href="${routepath}mail/manage">收件箱</a><i>648</i>
+                            </div>
+                            <div class="list-btn-mail">
+                                <span class="entypo-floppy"></span><a href="${routepath}mail/mailOutbox?type=1">草稿箱</a><i>5</i>
+                            </div>
+                            <div class="list-btn-mail">
+                                <span class="entypo-logout"></span><a href="${routepath}mail/mailOutbox">发件箱</a><i>123</i>
+                            </div>
+                            <div class="list-btn-mail">
+                                <span class="entypo-trash"></span><a>垃圾箱</a><i>123</i>
+                            </div>
+                            <div class="list-btn-mail">
+                                <span class="entypo-alert"></span><a>标记邮件</a><i>123</i>
+                            </div>
+                        </div>
+						
+						<!-- ModalLabel -->
+                        <#include "../form/_mailform.html" />
+						<!-- END OF ModalLabel -->
+                    </div>
+                    <!-- /SIDEMENU MAIL -->

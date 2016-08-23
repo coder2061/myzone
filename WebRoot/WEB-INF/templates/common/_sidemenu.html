@@ -1,0 +1,49 @@
+	<!-- SIDE MENU -->
+    <div id="skin-select">
+    
+        <div id="logo">
+            <h3>邮件系统<span>v1.0</span></h3>
+        </div>
+
+        <a id="toggle">
+            <span class="entypo-menu"></span>
+        </a>
+        <div class="dark">
+            <form action="#">
+                <span>
+                    <input type="text" name="search" value="" class="search rounded id_search" placeholder="搜索" autofocus="">
+                </span>
+            </form>
+        </div>
+
+        <div class="skin-part">
+            <div id="tree-wrap">
+                <div class="side-bar">
+                    <ul class="topnav menu-left-nest">
+                        <li>
+                            <a class="tooltip-tip ajax-load" href="${routepath}mail/manage" title="邮件">
+                                <i class="icon-mail"></i>
+                                <span>邮件</span>
+                                <div class="noft-blue">${mailNum?default(0)}</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tooltip-tip ajax-load" href="${routepath}contact/contactList" title="通讯录">
+                                <i class="icon-feed"></i>
+                                <span>通讯录</span>
+                                <div class="noft-blue">${contactNum?default(0)}</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tooltip-tip ajax-load" href="${routepath}log/logList" title="日志">
+                                <i class="icon-monitor"></i>
+                                <span>日志</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- END OF SIDE MENU -->

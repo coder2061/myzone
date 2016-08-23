@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>电子邮件系统 v1.0 - ${titlename?default('')}</title>
+    <base routepath="${routepath?default('myzone/')}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Le styles -->
+    <script type="text/javascript" src="/assets/js/jquery.js"></script>
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/loader-style.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/mail.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/assets/ico/minus.png">
+    
+    <!-- MAIN EFFECT -->
+    <script type="text/javascript" src="/assets/js/preloader.js"></script>
+    <script type="text/javascript" src="/assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/assets/js/app.js"></script>
+    <script type="text/javascript" src="/assets/js/load.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+    
+    <!-- TOP NAVBAR -->
+    <#include "../common/_topnavbar.html" />
+    <!-- /END OF TOP NAVBAR -->
+
+    <!-- SIDE MENU -->
+    <#include "../common/_sidemenu.html" />
+    <!-- END OF SIDE MENU -->
+
+    <!--  PAPER WRAP -->
+    <div class="wrap-fluid">
+        <div class="container-fluid paper-wrap bevel tlbr">
+            
+            <!--TITLE -->
+            <#include "../common/_title.html" />
+            <!--/ TITLE -->
+
+            <!-- BREADCRUMB -->
+            <#include "../common/_breadcrum.html" />
+            <!-- END OF BREADCRUMB -->
+			
+			<!-- CONTENT -->
+            <div class="content-wrap">
+                <div class="row">
+                
+                    <!-- SIDEMENU MAIL -->
+                    <#include "../common/_sidemenumail.html" />
+                    <!-- /SIDEMENU MAIL -->
+                    
+                    <!-- CONTENT MAIL -->
+                    <div class="col-sm-10">
+
+                        <div class="mail_header">
+                            <div class="row">
+                                <div class="col-sm-6">
+
+                                    <div style="margin-right:10px" class="btn-group pull-left">
+                                        <div class="btn">
+                                            <input type="checkbox" style="margin:0 5px;padding:0;position:relative;top:2px;">
+                                          </div>
+                                        <button type="button" class="btn  btn-info dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#">全部</a>
+                                            </li>
+                                            <li><a href="#">已读</a>
+                                            </li>
+                                            <li><a href="#">未读</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div style="margin-right:10px" class="btn-group pull-left">
+                                        <button type="button" class="btn  btn-info  dropdown-toggle" data-toggle="dropdown">更多操作
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#"><i class="fa fa-pencil"></i> 已读</a>
+                                            </li>
+                                            <li><a href="#"><i class="fa fa-ban"></i> 垃圾</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li><a href="#"><i class="fa fa-trash-o"></i> 彻底删除</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <button style="margin-right:10px" type="button" data-color="#39B3D7" data-opacity="0.95" class="btn btn-info button test pull-left">
+                                        <span class="entypo-arrows-ccw"></span>&nbsp;&nbsp;刷新
+                                     </button>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div id="content-mail">
+                            <div class="table-responsive">
+                            <!-- THE MESSAGES -->
+                                <#if list?exists && (list.getList()?size>0)>
+                                <table class="table table-mailbox">
+					     			<tr>
+					                     <th><input type="checkbox" id="checkall"></th>
+					                     <th>编号</th>
+					                     <th>星标</th>
+					                     <th>收件人</th>
+					                     <th>标题</th>
+					                     <th>内容</th>
+					                     <th>发送时间</th>
+					             </tr>
+					             <#list list.getList() as item>
+					             	<tr class="unread">
+					                     <td class="small-col">
+					                         <input type="checkbox" class="checkone" value="${item.ID?c}">
+					                     </td>
+					                     <td class="small-col">${item.ID?c}</td>
+					                     <td><i class="fa fa-star"></i></td>
+					                     <td class="name">${item.ReceiverName?default('/')}</td>
+					                     <td class="subject"><p class="email-summary"><strong>${item.Subject?default('/')}</strong></p></td>
+					                     <td class="subject"><p class="email-summary"><strong>${item.Content?default('/')}</strong></p></td>
+					                     <td class="time">${item.CreateTime?default('/')}</td>
+					                 </tr>
+					             </#list>
+					             </table>
+						         	<h4>共${list.getTotalRow()}条/此页${list.getList().size()}条</h4>
+							       	<#include "../common/_paginate.html" />
+							      	<@paginate currentPage=list.pageNumber totalPage=list.totalPage actionUrl="${routepath}mail/mailOutbox"  urlParas="&search=${tools.encode(search?default(''),'GET')}&status=${status?default('')}" />
+					            <#else>
+					            <div class='nolist'>没有您要搜索的记录！</div>
+								</#if>	
+								<!-- END OF THE MESSAGES -->
+								<!-- 
+	                            <div class="page-wrap pull-right">
+						        </div>
+						         -->
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                    </div>
+                    <!-- /CONTENT MAIL -->
+                </div>
+            </div>
+            <!-- /END OF CONTENT -->
+
+            <!-- FOOTER -->
+			<#include "../common/_footer.html" />
+			<!-- / END OF FOOTER -->
+			
+           </div>
+        </div>
+    </div>
+    <!--  END OF PAPER WRAP -->
+
+    <!-- RIGHT SLIDER CONTENT -->
+    <#include "../common/_rightslider.html" />
+	<!-- END OF RIGHT SLIDER CONTENT-->
+	
+	<script type="text/javascript">
+        $(function () {
+			$("#checkall").click(function(){
+				if (this.checked) {
+					$(".checkone").prop("checked", true);
+				} else {
+					$(".checkone").prop("checked", false);
+				}
+        	});
+        	
+        	$("#deletebtn").click(function(){
+            	var ids = "";
+            	$(".checkone:checked").each(function(){
+            	 ids += $(this).val() + ",";
+            	});
+            	if (notBlank(ids)) {
+					ids = ids.substring(0, ids.lastIndexOf(","));
+				} else {
+					alert("请选择删除项");
+					return false;
+				}
+            	if (confirm("确认要删除？")) {
+            		$.ajax({
+                        type: "POST",
+                        url: "${routepath}mail/delMailInbox",
+                        data: "ids="+ids,
+                        dataType: "json",
+                        async:false,
+                        success: function(data){ 
+	                       	 if (data.status == 0) {
+	                       		 alert("操作成功");
+	                       		window.location.reload(true);
+	             			 } else {
+	             				alert("操作失败");
+	    					 }
+                        }
+                    });
+            	} else {
+            		window.event.returnValue = false; 
+				}
+            	
+        	});
+        	
+			$("#refreshbtn").click(function(){
+				window.location.reload(true);
+        	});
+			
+			$("#search").blur(function(){
+				var search = $(this).val();
+				if (notBlank(search)) {
+	            	window.location.href = "${routepath}mail/mailOutbox?search="+encodeURIComponent(encodeURIComponent(search));
+				}
+        	});
+			
+			$("#sendEmail").click(function(){
+				$("#mailtype").val(0);
+        	});
+			
+			$("#saveDraft").click(function(){
+				$("#mailtype").val(1);
+        	});
+			
+        });
+        
+    </script>
+
+</body>
+
+</html>

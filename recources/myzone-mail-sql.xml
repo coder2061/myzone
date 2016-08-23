@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlGroup name="mail" >
+
+	<!-- Mail -->
+	
+	<!-- MailInbox -->
+	<sql id="getMailInboxListU">SELECT mli.ID,mli.IsTag,mli.CreateTime,mli.MailID,ml.`Subject`,ml.Content,m.`Name` AS SenderName </sql>
+	<sql id="getMailInboxListD"> FROM (SELECT * FROM mailinbox WHERE ReceiverID=? AND IsDel=0 ORDER BY ID DESC) mli LEFT JOIN mail ml ON mli.MailID=ml.ID LEFT JOIN member m ON mli.SenderID=m.ID sqlwhere </sql>
+	<sql id="updateIsDel">UPDATE mailinbox SET IsDel=1 WHERE ID=?</sql>
+	<sql id="updateStatus">UPDATE mailinbox SET Status=? WHERE ID=?</sql>
+	<sql id=""></sql>
+	
+	<!-- MailOutbox -->
+	<sql id="findMailOutboxByMailID">SELECT * FROM mailoutbox WHERE MailID=?;</sql>
+	<sql id="getMailOutboxListU">SELECT mlo.ID,mlo.IsTag,mlo.CreateTime,mlo.MailID,ml.`Subject`,ml.Content,(SELECT GROUP_CONCAT(Name) FROM member WHERE ID in(mlo.ReceiverID)) AS ReceiverName  </sql>
+	<sql id="getMailOutboxListD">  FROM (SELECT * FROM mailoutbox WHERE SenderID=? AND IsDel=0 ORDER BY ID DESC) mlo LEFT JOIN mail ml ON mlo.MailID=ml.ID sqlwhere </sql>
+	<sql id="updateIsDel">UPDATE MailOutbox SET IsDel=1 WHERE ID=?</sql>
+	<sql id="updateStatus">UPDATE MailOutbox SET Status=? WHERE ID=?</sql>
+	<sql id=""></sql>
+</sqlGroup>

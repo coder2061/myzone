@@ -1,0 +1,93 @@
+						<!-- ModalLabel -->
+                        <div aria-labelledby="myLargeModalLabel" role="dialog" tabindex="-1" class="modal fade bs-example-modal-lg" style="display: none;" id="mailModal">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">
+                                            <span class="entypo-cancel"></span>
+                                        </button>
+                                        <h6 id="myLargeModalLabel" class="modal-title">写邮件</h6>
+                                    </div>
+                                    
+                                    <div class="modal-body">
+                                        <div class="compose_mail">
+                                            <form role="form" id="writemail" action="${routepath}mail/editMail">
+                                            	<input type="hidden" id="mailID" name="mailID" value="0">
+                                            	<input type="hidden" id="mailtype" name="mailtype" value="0">
+                                                <div class="form-group">
+                                                    <input type="text" placeholder="发送至" id="ReceiverID" name="ReceiverID" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" placeholder="抄送至" id="CopyerID" name="CopyerID" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" placeholder="主题" id="Subject" name="Subject" class="form-control">
+                                                </div>
+
+                                                <div class="btn-group">
+                                                    <button data-toggle="dropdown" class="btn dropdown-toggle" type="button">
+                                                        <span class="fontawesome-font"></span>Normal text
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul role="menu" class="dropdown-menu">
+                                                        <li><a href="#">Action</a>
+                                                        </li>
+                                                        <li><a href="#">Another action</a>
+                                                        </li>
+                                                        <li><a href="#">Something else here</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn">
+                                                        <span class="fontawesome-bold"></span>
+                                                    </button>
+                                                    <button type="button" class="btn">
+                                                        <span class="fontawesome-italic"></span>
+                                                    </button>
+                                                    <button type="button" class="btn">
+                                                        <span class="fontawesome-underline"></span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn">
+                                                        <span class="fontawesome-list-ul"></span>
+                                                    </button>
+                                                    <button type="button" class="btn">
+                                                        <span class="fontawesome-list-ol"></span>
+                                                    </button>
+                                                    <button type="button" class="btn">
+                                                        <span class="fontawesome-indent-left"></span>
+                                                    </button>
+                                                    <button type="button" class="btn">
+                                                        <span class="fontawesome-indent-right"></span>
+                                                    </button>
+                                                </div>
+                                                <button type="button" class="btn">
+                                                    <span class="entypo-link"></span>
+                                                </button>
+                                                <button type="button" class="btn">
+                                                    <span class="entypo-attach"></span>
+                                                </button>
+                                                <button type="button" class="btn">
+                                                    <span class="fontawesome-table"></span>
+                                                </button>
+                                                <button type="button" class="btn">
+                                                    <span class="fontawesome-camera"></span>
+                                                </button>
+                                                <textarea id="Content" name="Content" style="height:200px!important;margin:20px 0" class="form-control" rows="8"></textarea>
+                                                <button id="sendEmail" class="btn btn-info" type="submit">发送</button>
+                                                <button  id="saveDraft" class="btn btn-info" type="submit">
+                                                    <span class="fontawesome-save"></span>&nbsp;&nbsp;保存草稿
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+						<!-- END OF ModalLabel -->

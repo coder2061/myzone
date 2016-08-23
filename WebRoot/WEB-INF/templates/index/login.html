@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>电子邮件系统 v1.0 - 登陆</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <script type="text/javascript" src="/assets/js/jquery.min.js"></script>
+
+    <!--  <link rel="stylesheet" href="/assets/css/style.css"> -->
+    <link rel="stylesheet" href="/assets/css/loader-style.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/signin.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/assets/ico/minus.png">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+
+    <div class="container">
+        <div class="" id="login-wrapper">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div id="logo-login">
+                        <h1>电子邮件系统<span>v1.0</span></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="account-box">
+                        <form role="form" action="${routepath}member/login" id="loginFrm">
+                            <div class="form-group">
+                                <a href="#" class="pull-right label-forgot">Forgot email?</a>
+                                <label for="account">用户名/手机/邮箱</label>
+                                <input type="text" id="account" name="account" class="form-control" value="${account?default('')}">
+                            </div>
+                            <div class="form-group">
+                                <a href="#" class="pull-right label-forgot">Forgot password?</a>
+                                <label for="passwd">密码</label>
+                                <input type="password" id="passwd" name="passwd" class="form-control">
+                            </div>
+                            <div class="checkbox pull-left">
+                                <label>
+                                	<#if isRember?exists && isRember==1>
+                                	<input type="checkbox" name="isRember" value="1" checked>记住账号
+			           				<#else>
+                                    <input type="checkbox" name="isRember" value="1" >记住账号
+			           				</#if>
+                                </label>
+                            </div>
+                            <button class="btn btn btn-primary pull-right" type="submit">登 录</button>
+                        </form>
+                        <div class="or-box">
+                        
+                        <!-- 
+                            <center><span class="text-center login-with">Login or <b>Sign Up</b></span></center>
+                            <div class="row">
+                                <div class="col-md-6 row-block">
+                                    <a href="index.html" class="btn btn-facebook btn-block">
+                                        <span class="entypo-facebook space-icon"></span>Facebook</a>
+                                </div>
+                                <div class="col-md-6 row-block">
+                                    <a href="index.html" class="btn btn-twitter btn-block"><span class="entypo-twitter space-icon"></span>Twitter</a>
+                                </div>
+                            </div>
+                            <div style="margin-top:25px" class="row">
+                                <div class="col-md-6 row-block">
+                                    <a href="index.html" class="btn btn-google btn-block"><span class="entypo-gplus space-icon"></span>Google +</a>
+                                </div>
+                                <div class="col-md-6 row-block">
+                                    <a href="index.html" class="btn btn-instagram btn-block"><span class="entypo-instagrem space-icon"></span>Instagram</a>
+                                </div>
+                            </div>
+                         -->
+                         
+                        </div>
+                        <div class="row-block">
+                            <div class="row">
+                                <div class="col-md-12 row-block">
+                                    <a href="${routepath}member/reg" class="btn btn-primary btn-block">注册</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p>&nbsp;</p>
+        <div style="text-align:center;margin:0 auto;">
+            <h6 style="color:#fff;">
+            	Copyright(C)2016 jxau.jxy.com All Rights Reserved<br/>
+			</h6>
+			 <h6 style="color:#fff;">
+				江西农业大学 版权所有 赣IP备00000001号
+			</h6>
+        </div>
+
+    </div>
+    
+    <!-- MAIN EFFECT -->
+    <script type="text/javascript" src="/assets/js/preloader.js"></script>
+    <script type="text/javascript" src="/assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/assets/js/app.js"></script>
+    <script type="text/javascript" src="/assets/js/load.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript">
+    	var status = '${status!""}';
+        $(function () {
+        	$("#loginFrm").submit(function(){
+        		var account = $('#account').val();
+            	var passwd = $('#passwd').val();
+            	var isCan = 0;
+            	if(isBlank(account)){
+            		alert("请输入用户名,手机号或邮箱");
+            		return false;
+            	} 
+            	if(isBlank(passwd)){
+            		alert("请输入密码");
+            		return false;
+            	} 
+            	
+        	});
+        	
+        	if (status == -1) {
+				alert("注册成功，请登录");
+			} else if (status == 1) {
+				alert("账号或密码输入有误");
+			}
+
+        });
+        
+        
+    </script>
+
+</body>
+
+</html>

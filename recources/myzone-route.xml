@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routeGroup type="/myzone" pkge="com.myzone.controller">
+	<route controllerkey="/index" className="IndexController" />
+	<route controllerkey="/member" className="MemberController" />
+	<route controllerkey="/mail" className="MailController" />
+	<route controllerkey="/contact" className="ContactController" />
+	<route controllerkey="/log" className="LogController" />
+</routeGroup>

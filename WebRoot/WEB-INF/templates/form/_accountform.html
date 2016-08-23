@@ -1,0 +1,54 @@
+						<!-- ModalLabel -->
+                        <div aria-labelledby="myLargeModalLabel" role="dialog" tabindex="-1" class="modal fade bs-example-modal-lg" style="display: none;" id="accountModal">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">
+                                            <span class="entypo-cancel"></span>
+                                        </button>
+                                        <h6 id="myLargeModalLabel" class="modal-title">账户设置</h6>
+                                    </div>
+                                    
+                                    <div class="modal-body">
+                                        <div class="compose_mail">
+                                        	<form role="form" id="accountfrm" action="${routepath}member/editPasswd" class="form-horizontal bucket-form">
+		                                        
+		                                        <div class="form-group">
+		                                            <label class="col-sm-3 control-label">原密码</label>
+		                                            <div class="col-sm-6">
+		                                                <input type="password" id="oldPasswd" name="oldPasswd" placeholder="" class="form-control">
+		                                            </div>
+		                                        </div>
+		                                        
+		                                        <div class="form-group">
+		                                            <label class="col-sm-3 control-label">新密码</label>
+		                                            <div class="col-sm-6">
+		                                                <input type="password" id="newPasswd" name="newPasswd" placeholder="" class="form-control">
+		                                            </div>
+		                                        </div>
+		                                        
+		                                        <div class="form-group">
+		                                            <label class="col-sm-3 control-label">确认密码</label>
+		                                            <div class="col-sm-6">
+		                                                <input type="password" id="rePasswd" name="rePasswd" placeholder="" class="form-control">
+		                                            </div>
+		                                        </div>
+                                        
+		                                        <div class="form-group text-center">
+	                                                <button  id="savePasswd" class="btn btn-info" type="submit">
+	                                                    <span class="fontawesome-save"></span>&nbsp;&nbsp;保存
+	                                                </button>
+	                                                <button class="btn btn-info" type="reset">
+	                                                	<span class="entypo-pencil"></span>&nbsp;&nbsp;重置
+	                                                </button>
+		                                        </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+						<!-- END OF ModalLabel -->
+						

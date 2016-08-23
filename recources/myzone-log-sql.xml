@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlGroup name="log" >
+	<sql id="saveLog">INSERT log(LogTypeID,AdminID,MemberID,MessageID,OperIp,OperTime,OperDesc,RequestContext) VALUES(?,?,?,?,?,?,?,?);</sql>
+	<sql id="getLogList">SELECT * FROM `log` WHERE MemberID=?;</sql>
+	<sql id="getLogListU">SELECT l.*,lt.TypeName </sql>
+	<sql id="getLogListD"> FROM `log` l LEFT JOIN logtype lt ON l.LogTypeID=lt.ID WHERE l.MemberID=? AND l.IsDel=0  sqlwhere ORDER BY l.ID DESC</sql>
+	<sql id="updateIsDel">UPDATE log SET IsDel=1 WHERE ID=?</sql>
+	
+</sqlGroup>

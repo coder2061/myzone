@@ -1,0 +1,3 @@
+jdbcUrl = jdbc:mysql://127.0.0.1/myzone?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+user = root
+password = root
